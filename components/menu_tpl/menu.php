@@ -1,6 +1,6 @@
 <?php //ul>li*5>a{Item $} введи и офигей ?>
 <li>
-    <a href="">
+    <a href="<?= \yii\helpers\Url::to(['category/view', 'id' => $category['id']]) ?>">
         <?= $category['name'] ?>
         <?php if (isset($category['childs'])):?>
             <span class="badge pull-right">
