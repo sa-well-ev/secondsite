@@ -3,7 +3,7 @@
 /* @var $this yii\web\View */
 use yii\helpers\Html;
 
-$this->title = 'My Yii Application';
+//$this->title = 'My Yii Application';
 ?>
 <section id="slider"><!--slider-->
     <div class="container">

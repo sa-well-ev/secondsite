@@ -16,6 +16,7 @@ class CategoryController extends AppController
     public function actionIndex()
     {
         $hits = Product::find()->where(['hit' => '1'])->limit(6)->all();
+        $this->setMeta('E-SHOPPER');
         return $this->render('index', compact('hits'));
     }
 
@@ -24,6 +25,8 @@ class CategoryController extends AppController
         //Непонятно зачем переписывать переменную $id когда она и так приходит из вне в параметре метода
         //$id = Yii::$app->request->get('id');
         $products = Product::find()->where(['category_id' => $id])-> all();
-        return $this->render('view', compact('products'));
+        $category = Category::findOne($id);
+        $this->setMeta('E-SHOPPER | ' .$category->name, $category->keywords, $category->description);
+        return $this->render('view', compact('products', 'category'));
     }
 }

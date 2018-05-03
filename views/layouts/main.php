@@ -10,6 +10,7 @@ use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
 use app\assets\AppAsset;
 use app\assets\ltAppAsset;
+use yii\helpers\Url;
 
 AppAsset::register($this);
 ltAppAsset::register($this);
@@ -76,7 +77,7 @@ ltAppAsset::register($this);
 				<div class="row">
 					<div class="col-sm-4">
 						<div class="logo pull-left">
-							<a href="index.html"><img src="/images/home/logo.png" alt="" /></a>
+							<a href="<?= Url::home()?>"><?= Html::img('@web/images/home/logo.png', ['alt' => 'GO Home'])?> </a>
 						</div>
 						<div class="btn-group pull-right">
 							<div class="btn-group">
