@@ -10,6 +10,7 @@ namespace app\controllers;
 use app\models\Category;
 use app\models\Product;
 use Yii;
+use yii\data\Pagination;
 
 class CategoryController extends AppController
 {
@@ -24,9 +25,20 @@ class CategoryController extends AppController
     {
         //Непонятно зачем переписывать переменную $id когда она и так приходит из вне в параметре метода
         //$id = Yii::$app->request->get('id');
-        $products = Product::find()->where(['category_id' => $id])-> all();
+
+        //Начинаем разбивать по странично - все объекты сразу нам не нужны.
+        //$products = Product::find()->where(['category_id' => $id])-> all();
+
+        //Начинаем строить разбивку по страницам
+        $query = Product::find()->where(['category_id' => $id]);
+        $pages = new Pagination([
+            'totalCount' => $query->count(),
+            'pageSize' => 3
+        ]);
+        $products = $query->offset($pages->offset)->limit($pages->limit)->all();
+
         $category = Category::findOne($id);
         $this->setMeta('E-SHOPPER | ' .$category->name, $category->keywords, $category->description);
-        return $this->render('view', compact('products', 'category'));
+        return $this->render('view', compact('products', 'pages', 'category'));
     }
 }

@@ -2,6 +2,7 @@
 
 /* @var $this yii\web\View */
 use yii\helpers\Html;
+use yii\widgets\LinkPager;
 
 //$this->title = 'My Yii Application';
 ?>
@@ -96,16 +97,17 @@ use yii\helpers\Html;
                                 <div class="clearfix"></div>
                             <?php endif;?>
                         <?php  endforeach;?>
+                        <!--Чтобы не съезжала вёрстка-->
+                        <div class="clearfix"></div>
+                        <?= LinkPager::widget(['pagination' => $pages]);?>
                         <?php else:?>
                         <h2>Нет товаров в этой категории</h2>
                     <?php endif;?>
-                    <!--Чтобы не съезжала вёрстка-->
-                    <div class="clearfix"></div>
-                    <ul class="pagination">
+                    <!--<ul class="pagination">
                         <li class="active"><a href="">1</a></li>
                         <li><a href="">2</a></li>
                         <li><a href="">3</a></li>
-                        <li><a href="">&raquo;</a></li>
+                        <li><a href="">&raquo;</a></li>-->
                     </ul>
                 </div><!--features_items-->
             </div>
