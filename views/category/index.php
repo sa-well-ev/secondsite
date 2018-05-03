@@ -2,6 +2,7 @@
 
 /* @var $this yii\web\View */
 use yii\helpers\Html;
+use yii\helpers\Url;
 
 //$this->title = 'My Yii Application';
 ?>
@@ -120,18 +121,21 @@ use yii\helpers\Html;
                             <div class="single-products">
                                 <div class="productinfo text-center">
                                     <!--было <img src="images/home/product1.jpg" alt="" />-->
-                                    <?= Html::img("@web/images/products/{$hit->img}", ['alt' => $hit->name])?>
+                                    <a href="<?= Url::to(['product/view', 'id' => $hit->id])?>">
+                                        <?= Html::img("@web/images/products/{$hit->img}", ['alt' => $hit->name])?>
+                                    </a>
                                     <h2>$<?= $hit->price?></h2>
-                                    <p><?= $hit->name?></p>
+                                    <p><a href="<?= Url::to(['product/view', 'id' => $hit->id])?>"><?= $hit->name?></a></p>
                                     <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
                                 </div>
-                                <div class="product-overlay">
+                                <!--Всплывающее меню не даёт нажать на ссылку-->
+                                <!--<div class="product-overlay">
                                     <div class="overlay-content">
-                                        <h2>$<?= $hit->price?></h2>
-                                        <p><?= $hit->name?></p>
+                                        <h2>$<?/*= $hit->price*/?></h2>
+                                        <p><?/*= $hit->name*/?></p>
                                         <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
                                     </div>
-                                </div>
+                                </div>-->
                                 <?php if ($hit->new):?>
 <!--                                    <img src="images/home/new.png" class="new" alt="">-->
                                     <?= Html::img("@web/images/home/new.png", ['alt' => 'New', 'class' => 'new'])?>

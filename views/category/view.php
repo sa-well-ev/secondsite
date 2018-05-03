@@ -3,6 +3,7 @@
 /* @var $this yii\web\View */
 use yii\helpers\Html;
 use yii\widgets\LinkPager;
+use yii\helpers\Url;
 
 //$this->title = 'My Yii Application';
 ?>
@@ -62,18 +63,20 @@ use yii\widgets\LinkPager;
                                 <div class="single-products">
                                     <div class="productinfo text-center">
 <!--                                        <img src="/images/shop/product12.jpg" alt="" />-->
-                                        <?= Html::img("@web/images/products/{$product->img}", ['alt' => $product->name])?>
+                                        <a href="<?= Url::to(['product/view', 'id' => $product->id])?>">
+                                            <?= Html::img("@web/images/products/{$product->img}", ['alt' => $product->name])?>
+                                        </a>
                                         <h2>$ <?= $product->price?></h2>
-                                        <p><?= $product->name?></p>
+                                        <p><a href="<?= Url::to(['product/view', 'id' => $product->id])?>"><?= $product->name?></a></p>
                                         <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
                                     </div>
-                                    <div class="product-overlay">
+                                    <!--<div class="product-overlay">
                                         <div class="overlay-content">
-                                            <h2><?= $product->price?></h2>
-                                            <p><?= $product->name?></p>
+                                            <h2><?/*= $product->price*/?></h2>
+                                            <p><?/*= $product->name*/?></p>
                                             <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
                                         </div>
-                                    </div>
+                                    </div>-->
                                     <?php if ($product->new):?>
                                         <!--                                    <img src="images/home/new.png" class="new" alt="">-->
                                         <?= Html::img("@web/images/home/new.png", ['alt' => 'New', 'class' => 'new'])?>
@@ -97,9 +100,12 @@ use yii\widgets\LinkPager;
                                 <div class="clearfix"></div>
                             <?php endif;?>
                         <?php  endforeach;?>
+
                         <!--Чтобы не съезжала вёрстка-->
                         <div class="clearfix"></div>
+                        <!--Добавляем разбивку на страницы-->
                         <?= LinkPager::widget(['pagination' => $pages]);?>
+
                         <?php else:?>
                         <h2>Нет товаров в этой категории</h2>
                     <?php endif;?>
