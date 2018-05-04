@@ -1,17 +1,12 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Дмитрий
- * Date: 04.05.2018
- * Time: 15:54
- */
+
 
 namespace app\models;
+use yii\db\ActiveRecord;
 
-
-use yii\base\Model;
-
-class Cart extends Model
+class Cart extends ActiveRecord
 {
-
+    public function addToCart($product, $qty = 1){
+        echo 'Worked!';
+    }
 }

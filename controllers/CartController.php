@@ -1,18 +1,10 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Дмитрий
- * Date: 04.05.2018
- * Time: 15:49
- */
 
 namespace app\controllers;
-
 use app\models\Product;
 use app\models\Cart;
 use Yii;
 
-// Описание структуры корзины
 /*Array
 (
     [1] => Array
@@ -36,11 +28,15 @@ use Yii;
 
 class CartController extends AppController
 {
-    public function actionAdd()
-    {
+    public function actionAdd(){
         $id = Yii::$app->request->get('id');
         $product = Product::findOne($id);
-        if (empty($product)) return false;
-        debug($product);
+        if(empty($product)) return false;
+        //работаем с сессией
+        $session =Yii::$app->session;
+        $session->open();
+
+        $cart = new Cart();
+        $cart->addToCart($product);
     }
 }
