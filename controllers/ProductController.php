@@ -24,7 +24,9 @@ class ProductController extends AppController
         //$products = Product::find()->with('category')->where(['id' => $id])->limit(1)->one();
         //Ленивая загрузка
         $product = Product::findOne($id);
+        $hits = Product::find()->where(['hit' => '1'])->limit(6)->all();
+        $this->setMeta('E-SHOPPER | ' .$product->name, $product->keywords, $product->description);
 
-        return $this->render('view', compact('product'));
+        return $this->render('view', compact('product', 'hits'));
     }
 }
