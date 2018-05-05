@@ -7,21 +7,23 @@
 	});
 
 $('.add-to-cart').on('click', function (e) {
-    e.preventDefault();
+    //Переназначаем стандартное поведение на нажатие ссылки так же можно добавить return false в конец функции
+	e.preventDefault();
     var id = $(this).data('id');
     $.ajax({
         url: '/cart/add',
         data: {id: id},
         type: 'GET',
-        success: function(res){
-            if(!res) alert('Ошибка!');
-            console.log(res);
+        success: function(data){
+            if(!data) alert('Ответ пустой');
+            console.log(data);
             //showCart(res);
         },
         error: function(){
-            alert('Error!');
+            alert('Запрос завершился неизвестной ошибкой');
         }
     });
+    //return false;
 });
 
 	var RGBChange = function() {

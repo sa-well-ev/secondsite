@@ -38,5 +38,15 @@ class CartController extends AppController
 
         $cart = new Cart();
         $cart->addToCart($product);
+
+        $this->layout = false;
+        /**Таким вот образом AJAX запрос не может получить ответ методом render поскольку использует шаблон в который
+         * включает отрисовку этого запроса, поэтому нужно или использовать renderPartial (отключает шаблон)
+         * или renderAjax (отключает шаблон но подгружает необходимые скрипты
+         * или отключат шаблон вручну для этого Action (Хотя всё равно всё работает*/
+        //return $this->render('cart-modal', ['session' => $session]);
+        return $this->render('cart-modal', compact('session'));
+
+
     }
 }

@@ -2,11 +2,48 @@
 
 
 namespace app\models;
-use yii\db\ActiveRecord;
+use yii\base\Model;
+//use yii\db\ActiveRecord;
 
-class Cart extends ActiveRecord
+/* Это структура модели корзины, непонятно зачем автор поместил её в контроллер
+ * ведь она заполнется здесь
+ * Array
+(
+    [1] => Array
+    (
+        [qty] => QTY
+        [name] => NAME
+        [price] => PRICE
+        [img] => IMG
+    )
+    [10] => Array
+    (
+        [qty] => QTY
+        [name] => NAME
+        [price] => PRICE
+        [img] => IMG
+    )
+)
+    [qty] => QTY,
+    [sum] => SUM
+);*/
+
+//Класс расширял Model, непонятно зачем автор переопределил его как ActiveRecord
+class Cart extends Model
 {
     public function addToCart($product, $qty = 1){
-        echo 'Worked!';
+        //echo 'Worked!';
+        if (isset($_SESSION['cart'][$product->id])) {
+            $_SESSION['cart'][$product->id]['qty'] += $qty;
+        } else {
+            $_SESSION['cart'][$product->id] = [
+                'qty' => $qty,
+                'name' => $product->name,
+                'price' => $product->price,
+                'img' => $product->img
+            ];
+        }
+        $_SESSION['cart.qty'] = isset($_SESSION['cart.qty']) ? $_SESSION['cart.qty'] + $qty : $qty;
+        $_SESSION['cart.sum'] = isset($_SESSION['cart.sum']) ? $_SESSION['cart.sum'] + $qty*$product->price : $qty*$product->price;
     }
 }
