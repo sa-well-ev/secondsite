@@ -11,6 +11,22 @@ function showCart(cart) {
     $('#cart').modal();
 }
 
+function getCart() {
+    $.ajax({
+        url: '/cart/show',
+        type: 'GET',
+        success: function (data) {
+            if (!data) alert('Ответ пустой');
+            //console.log(data);
+            showCart(data);
+        },
+        error: function () {
+            alert('Запрос завершился неизвестной ошибкой');
+        }
+    });
+    return false;
+}
+
 $('#cart .modal-body').on('click', '.del-item' , function () {
     //Очень интересно забираетмя значение атрибута тега "data-id" через .data('id')
     var id = $(this).data('id');
