@@ -6,6 +6,26 @@
 		speed: 300
 	});
 
+function showCart(cart) {
+    $('#cart .modal-body').html(cart);
+    $('#cart').modal();
+}
+
+function clearCart() {
+    $.ajax({
+        url: '/cart/clear',
+        type: 'GET',
+        success: function(data){
+            if(!data) alert('Ответ пустой');
+            //console.log(data);
+            showCart(data);
+        },
+        error: function(){
+            alert('Запрос завершился неизвестной ошибкой');
+        }
+    });
+}
+
 $('.add-to-cart').on('click', function (e) {
     //Переназначаем стандартное поведение на нажатие ссылки так же можно добавить return false в конец функции
 	e.preventDefault();
@@ -16,8 +36,8 @@ $('.add-to-cart').on('click', function (e) {
         type: 'GET',
         success: function(data){
             if(!data) alert('Ответ пустой');
-            console.log(data);
-            //showCart(res);
+            //console.log(data);
+            showCart(data);
         },
         error: function(){
             alert('Запрос завершился неизвестной ошибкой');
