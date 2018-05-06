@@ -1158,11 +1158,9 @@ h2.title {
 	overflow:hidden;
 }
 
-
 #similar-product {
   margin-top: 40px;
 }
-
 
 #reviews {
   padding-left: 25px;
@@ -1175,7 +1173,9 @@ h2.title {
   margin-top: 10px;
 }
 
-
+.del-item {
+  cursor: pointer;
+}
 
 .view-product {
   position: relative;
