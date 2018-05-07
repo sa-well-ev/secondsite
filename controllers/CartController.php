@@ -30,6 +30,9 @@ class CartController extends AppController
 {
     public function actionAdd(){
         $id = Yii::$app->request->get('id');
+        $qty = (int)Yii::$app->request->get('qty');
+        //Проверяем число ли то количество что нам передано
+        $qty = !$qty ? 1 : $qty;
         $product = Product::findOne($id);
         if(empty($product)) return false;
         //работаем с сессией
@@ -37,7 +40,12 @@ class CartController extends AppController
         $session->open();
 
         $cart = new Cart();
-        $cart->addToCart($product);
+        $cart->addToCart($product, $qty);
+
+        //Для отрисовки проверяем не AJAX ли это запрос
+        if (!Yii::$app->request->isAjax){
+          return $this->redirect(Yii::$app->request->referrer);
+        };
 
         $this->layout = false;
         /**Таким вот образом AJAX запрос не может получить ответ методом render поскольку использует шаблон в который

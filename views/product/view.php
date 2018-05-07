@@ -101,11 +101,15 @@ use yii\helpers\Url;
                             <span>
 									<span>US $<?= $product->price?></span>
 									<label>Quantity:</label>
-									<input type="text" value="1" />
-									<button type="button" class="btn btn-fefault cart">
+									<input id="qty" type="text" value="1" />
+                                    <!--Если например отключены скрипты в браузере, то будет отрабатывать переход по ссылке
+                                    (поскольку не будет срабатывать переопределение стандартного действия в скрипте)
+                                    и будет отрабатываться тоже добавление в корзину сервером но уже без передачи количества
+                                    Это как запасной вариант-->
+									<a href=" <?= Url::to(['cart/add', 'id' => $product->id])?>" data-id="<?= $product->id?>" class="btn btn-fefault add-to-cart cart">
 										<i class="fa fa-shopping-cart"></i>
 										Add to cart
-									</button>
+									</a>
 								</span>
                             <p><b>Availability:</b> In Stock</p>
                             <p><b>Condition:</b> New</p>

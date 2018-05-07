@@ -63,10 +63,11 @@ function clearCart() {
 $('.add-to-cart').on('click', function (e) {
     //Переназначаем стандартное поведение на нажатие ссылки так же можно добавить return false в конец функции
 	e.preventDefault();
-    var id = $(this).data('id');
+    var id = $(this).data('id'),
+        qty = $('#qty').val();
     $.ajax({
         url: '/cart/add',
-        data: {id: id},
+        data: {id: id, qty: qty},
         type: 'GET',
         success: function(data){
             if(!data) alert('Ответ пустой');
