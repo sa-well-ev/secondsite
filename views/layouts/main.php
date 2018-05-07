@@ -331,7 +331,7 @@ ltAppAsset::register($this);
     'header' => '<h2>Корзина</h2>',
     'size' => 'modal-lg',
     'footer' => '<button type="button" class="btn btn-default" data-dismiss="modal">Продолжить покупки</button>
-<button type="button" class="btn btn-success">Оформить заказ</button>
+<a href="' . Url::to(['cart/view']) .'" class="btn btn-success">Оформить заказ</a>
 <button type="button" class="btn btn-danger" onclick="clearCart()">Очистить корзину</button>',
 ])?>
 <?php Modal::end()?>

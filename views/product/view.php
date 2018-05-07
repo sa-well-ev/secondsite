@@ -106,7 +106,7 @@ use yii\helpers\Url;
                                     (поскольку не будет срабатывать переопределение стандартного действия в скрипте)
                                     и будет отрабатываться тоже добавление в корзину сервером но уже без передачи количества
                                     Это как запасной вариант-->
-									<a href=" <?= Url::to(['cart/add', 'id' => $product->id])?>" data-id="<?= $product->id?>" class="btn btn-fefault add-to-cart cart">
+									<a href="<?= Url::to(['cart/add', 'id' => $product->id])?>" data-id="<?= $product->id?>" class="btn btn-fefault add-to-cart cart">
 										<i class="fa fa-shopping-cart"></i>
 										Add to cart
 									</a>
