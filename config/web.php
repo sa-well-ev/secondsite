@@ -30,6 +30,7 @@ $config = [
         ],
         'user' => [
             'identityClass' => 'app\models\User',
+            // Использовать куки при авторизации
             'enableAutoLogin' => true,
         ],
         'errorHandler' => [
