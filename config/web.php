@@ -32,6 +32,8 @@ $config = [
             'identityClass' => 'app\models\User',
             // Использовать куки при авторизации
             'enableAutoLogin' => true,
+            // Меняем страницу для авторизации
+            'loginUrl' => 'site/login'
         ],
         'errorHandler' => [
             'errorAction' => 'site/error',
