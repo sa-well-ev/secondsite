@@ -10,11 +10,13 @@ namespace app\modules\admin\controllers;
 
 
 use yii\web\Controller;
-use yii\filters\AccessControl;
+//use yii\filters\AccessControl;
 
 class AppAdminController extends Controller
 {
-    public function behaviors()
+    //Контроль доступа отсюда не получился, поскольку в новосозданных контроллерах их метод behaviors
+    // переписывает этот метод
+    /* public function behaviors()
     {
         return [
             'access' => [
@@ -27,5 +29,5 @@ class AppAdminController extends Controller
                     ],
                 ],
             ];
-    }
+    }*/
 }
