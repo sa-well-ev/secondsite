@@ -6,7 +6,7 @@ use yii\grid\GridView;
 /* @var $this yii\web\View */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Categories';
+$this->title = 'Категории товаров';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="category-index">
@@ -23,7 +23,18 @@ $this->params['breadcrumbs'][] = $this->title;
             ['class' => 'yii\grid\SerialColumn'],
 
             'id',
-            'parent_id',
+            //'parent_id',
+            //подставляем вместо цифры - наименование категории.
+            [
+                'attribute' => 'parent_id',
+                'value' => function($data)
+                {
+                    /*Почему то при обращении таблицы к самой себе ИМЕННО в этом месте ошибка
+                    что $data->category->name - не является объектом с массивом всё работает*/
+                    //return $data->category->name ? $data->category->name : 'Корневая категория' ;
+                    return $data->category['name'] ? $data->category['name'] : 'Корневая категория' ;
+                },
+            ],
             'name',
             'keywords',
             'description',
