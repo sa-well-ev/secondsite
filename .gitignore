@@ -42,6 +42,7 @@ tests/_support/_generated
 /web/robots.txt
 /web/favicon.ico
 /web/index-test.php
+/web/upload
 
 #Root Garbage
 /requirements.php
