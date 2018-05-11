@@ -17,6 +17,7 @@ use Yii;
 class MenuWidget extends Widget
 {
     public $tpl;
+    public $model;
     public $data;
     public $tree;
     public $menuHtml;
@@ -32,17 +33,21 @@ class MenuWidget extends Widget
 
     public function run()
     {
-        //Проверяем есть что то в кэше.
-        $menu = Yii::$app->cache->get('menu');
-        if ($menu) return $menu;
-
+        //Включаем кэширование только для шаблона меню
+        if ($this->tpl == 'menu.php') {
+            //Проверяем есть что то в кэше.
+            $menu = Yii::$app->cache->get('menu');
+            if ($menu) return $menu;
+        }
         $this->data = Category::find()->indexBy('id')->asArray()->all();
         $this->tree = $this->getTree();
         $this->menuHtml = $this->getMenuHtml($this->tree);
 
         //Запишем меню в кэщ
-        Yii::$app->cache->set('menu', $this->menuHtml, 60);
-
+        //Включаем кэширование только для шаблона меню
+        if ($this->tpl == 'menu.php') {
+            Yii::$app->cache->set('menu', $this->menuHtml, 60);
+        }
         return $this ->menuHtml;
     }
 
@@ -65,15 +70,17 @@ class MenuWidget extends Widget
         return $tree;
     }
 
-    protected function getMenuHtml($tree){
+    //Переменная tab нужна для формирования отступов в списке категорий
+    protected function getMenuHtml($tree , $tab = ''){
         $str = '';
         foreach ($tree as $category) {
-            $str .= $this->catToTemplate($category);
+            $str .= $this->catToTemplate($category, $tab);
         }
         return $str;
     }
 
-    protected function catToTemplate($category){
+    //Переменная tab нужна для формирования отступов в списке категорий
+    protected function catToTemplate($category, $tab){
         /**Чтобы include шаблон не выводился в браузер происходит его буферизация.
          хотя в шаблоне можно было весь вывод присвоить переменной и просто вернуть её, но это неудобно*/
         ob_start();

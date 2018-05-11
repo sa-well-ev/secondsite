@@ -32,7 +32,8 @@ $this->params['breadcrumbs'][] = $this->title;
             //'parent_id',
             [
                 'attribute' => 'parent_id',
-                'value' => $model->category->name ? $model->category->name : 'Корневая категория',
+                //'value' => $model->category->name ? $model->category->name : 'Корневая категория',
+                'value' => $model->category['name'] ? $model->category['name'] : 'Корневая категория',
             ],
             'name',
             'keywords',
