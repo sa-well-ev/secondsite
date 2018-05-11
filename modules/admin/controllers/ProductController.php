@@ -67,6 +67,8 @@ class ProductController extends Controller
         $model = new Product();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            //Флэш сообщение
+            Yii::$app->session->setFlash('success', "Товар {$model->name} создан");
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
