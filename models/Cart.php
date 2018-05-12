@@ -31,7 +31,17 @@ use yii\base\Model;
 //Класс расширял Model, непонятно зачем автор переопределил его как ActiveRecord
 class Cart extends Model
 {
+    public function behaviors()
+    {
+        return [
+            'image' => [
+                'class' => 'rico\yii2images\behaviors\ImageBehave',
+            ]
+        ];
+    }
+
     public function addToCart($product, $qty = 1){
+        $mainImg = $product->getImage();
         //echo 'Worked!';
         if (isset($_SESSION['cart'][$product->id])) {
             $_SESSION['cart'][$product->id]['qty'] += $qty;
@@ -40,7 +50,7 @@ class Cart extends Model
                 'qty' => $qty,
                 'name' => $product->name,
                 'price' => $product->price,
-                'img' => $product->img
+                'img' => $mainImg->getUrl('x50'),
             ];
         }
         $_SESSION['cart.qty'] = isset($_SESSION['cart.qty']) ? $_SESSION['cart.qty'] + $qty : $qty;
