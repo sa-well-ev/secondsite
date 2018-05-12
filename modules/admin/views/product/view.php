@@ -40,6 +40,13 @@ $this->params['breadcrumbs'][] = $this->title;
             [
                 'attribute' => 'image',
                 //'value' => $img->getPathToOrigin(),
+                /* Строка ниже выдавала вместо пути к action какую то лабуду. Победить это получилось изменив код модуля yii2-image
+                 * в модели vendor/costa-rico/yii2-images/models/Image.php в методе getUrl()
+                 * строку '/'.$this->getPrimaryKey().'/images/image-by-item-and-alias',
+                 * заменили на
+                 * строку '/'.$this->getModule()->id.'/images/image-by-item-and-alias',
+                 *
+              */
                 'value' => '<img src="' . $img->getUrl(). '">',
                 'format' => 'html',
             ],
