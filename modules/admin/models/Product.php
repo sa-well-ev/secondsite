@@ -3,6 +3,7 @@
 namespace app\modules\admin\models;
 
 use Yii;
+use yii\web\UploadedFile;
 
 /**
  * This is the model class for table "product".
@@ -85,6 +86,8 @@ class Product extends \yii\db\ActiveRecord
         if($this->validate()){
             $path = 'upload/store/' . $this->image->baseName . '.' . $this->image->extension;
             $this->image->saveAs($path);
+            $this->attachImage($path, true);
+            @unlink($path);
             return true;
         }else{
             return false;
